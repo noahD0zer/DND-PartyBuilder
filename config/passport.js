@@ -9,7 +9,7 @@ passport.use(new GoogleStrategy(
     // Now we build our configuration inside this function call
     {
         clientID: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_SECRET,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         callbackURL: process.env.GOOGLE_CALLBACK
     },
     // the verify callback func
