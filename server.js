@@ -4,16 +4,26 @@ const path = require('path');
 const middleware = require('./config/middleware');
 const mongoose = require('mongoose');
 require('dotenv').config();
+const app = express();
 
-// const AuthRouter = require('./controllers/authController'); // Import your auth routes
+const passport = require ('passport');
+
+
+const AuthRouter = require('./controllers/auth'); // Import your auth routes
 // const PartiesRouter = require('./controllers/partyController');
 // const AdventurerRouter = require('./controllers/adventurerController');
 const UsersRouter = require('./controllers/users');
 
-// // Require your passport configuration
-// const passportConfig = require('./config/passport');
+//express session
+app.use(require('express-session')({ 
+  secret: 'Enter your secret key',
+  resave: true,
+  saveUninitialized: true
+ }));
 
-const app = express();
+// // Require your passport configuration
+app.use(passport.initialize());
+app.use(passport.session());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -38,12 +48,8 @@ mongoose.connect(process.env.DB_URL, {
 app.get('/', (req, res) => {
   res.render('index', { title: 'Main Page' });
 });
-app.get('/login', (req, res) => {
-  console.log('got login')
-  res.render('login');
-})
 
-// app.use('/', AuthRouter); // Use the AuthRouter for authentication routes
+app.use('/', AuthRouter); // Use the AuthRouter for authentication routes
 // app.use('/parties', PartiesRouter);
 // app.use('/adventurers', AdventurerRouter);
 app.use('/users', UsersRouter);

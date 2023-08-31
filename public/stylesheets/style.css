@@ -6,3 +6,17 @@ body {
 a {
   color: #00B7FF;
 }
+
+nav {
+  padding-top: .5vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: end;
+}
+
+nav > a {
+  margin: 1vmin;
+  display: flex;
+  align-items: center;
+}

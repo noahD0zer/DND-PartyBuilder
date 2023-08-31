@@ -1,0 +1,14 @@
+<%- include("./header") %>
+<nav>
+    <a href="/">HOME</a>
+
+    <a href="/parties">Parties</a>
+    
+    <% if (user) { %>
+
+    <a class="navbar-link text-danger me-3" href="/logout">Log Out</a>
+    <% } else { %>    
+    <a class="navbar-link text-success me-3" href="/auth/google">Log In</a>
+    <% } %>
+</nav>
+<h3><%= title %></h3>
