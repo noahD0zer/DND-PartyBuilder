@@ -1,24 +1,27 @@
 const express = require('express');
 const path = require('path');
-const passport = require('passport'); // Import passport
+//const passport = require('passport'); // Import passport
 const middleware = require('./config/middleware');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-const AuthRouter = require('./controllers/authController'); // Import your auth routes
-const PartiesRouter = require('./controllers/partyController');
-const AdventurerRouter = require('./controllers/adventurerController');
+// const AuthRouter = require('./controllers/authController'); // Import your auth routes
+// const PartiesRouter = require('./controllers/partyController');
+// const AdventurerRouter = require('./controllers/adventurerController');
+const UsersRouter = require('./controllers/users');
 
-// Require your passport configuration
-const passportConfig = require('./config/passport');
+// // Require your passport configuration
+// const passportConfig = require('./config/passport');
 
 const app = express();
-
-middleware(app);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+middleware(app)
+
+
 
 // Connect to MongoDB
 mongoose.connect(process.env.DB_URL, {
@@ -35,10 +38,15 @@ mongoose.connect(process.env.DB_URL, {
 app.get('/', (req, res) => {
   res.render('index', { title: 'Main Page' });
 });
+app.get('/login', (req, res) => {
+  console.log('got login')
+  res.render('login');
+})
 
-app.use('/', AuthRouter); // Use the AuthRouter for authentication routes
-app.use('/parties', PartiesRouter);
-app.use('/adventurers', AdventurerRouter);
+// app.use('/', AuthRouter); // Use the AuthRouter for authentication routes
+// app.use('/parties', PartiesRouter);
+// app.use('/adventurers', AdventurerRouter);
+app.use('/users', UsersRouter);
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
