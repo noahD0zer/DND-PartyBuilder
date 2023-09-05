@@ -7,7 +7,7 @@ app = "partybuilder"
 primary_region = "iad"
 
 [env]
-  PORT = "3000"
+  PORT = "8080"
   DB_URL = "mongodb+srv://noahmendoza97:mongodb@noahscluster.qqky7pl.mongodb.net/?retryWrites=true&w=majority"
   GOOGLE_CLIENT_ID = "554889927985-udnckccqami6dv3i5j1kn3seuai54tui.apps.googleusercontent.com"
   GOOGLE_CLIENT_SECRET = "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"
