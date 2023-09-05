@@ -6,16 +6,22 @@
         <% const party = parties[(parties.length - i)] %>
         <div class="party">
             <h3><%= party.name ? party.name : "New Party" %></h3>
+            <form action="/parties/<%= party._id %>/like" method="POST">
+                <button type="submit">Like</button>
+            </form>
+            <p>Likes: <%= party.likes_count %></p>
             <h4><%= party.owner.name %></h4>
-            <p>Updoots: <%= party.updoots ? party.updoots : 0 %></p>
             <div class="adventurers">
                 <% party.adventurers.forEach(adventurer => { %>
                     <p>
-                        <%= adventurer.name ? `${adventurer.name} ` : "" %><%= adventurer.race %><%= adventurer.class%>
+                        <%= adventurer.name ? `${adventurer.name} ` : "" %>
+                        <br>
+                        <%= adventurer.race ? `${adventurer.race} ` : "" %><%= adventurer.class%>
                     </p>
                 <% }) %>
             </div>
-            <a class="party-link" href="/parties/<%= party._id %>">more</a>
+            <a class="party-link" href="/parties/<%= party._id %>">details</a>
+            <br>
         </div>
     <% } %>
 </div>

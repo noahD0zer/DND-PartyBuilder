@@ -1,0 +1,25 @@
+# fly.toml app configuration file generated for partybuilder on 2023-09-05T01:57:20-04:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "partybuilder"
+primary_region = "iad"
+
+[env]
+  PORT = "3000"
+  DB_URL = "mongodb+srv://noahmendoza97:mongodb@noahscluster.qqky7pl.mongodb.net/?retryWrites=true&w=majority"
+  GOOGLE_CLIENT_ID = "554889927985-udnckccqami6dv3i5j1kn3seuai54tui.apps.googleusercontent.com"
+  GOOGLE_CLIENT_SECRET = "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"
+  GOOGLE_CALLBACK = "https://partybuilder.fly.dev/oauth2callback"
+  SESSION_SECRET = "92647358"
+
+[build]
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]

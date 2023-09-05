@@ -4,8 +4,9 @@
 }
 
 body {
-  background-color: darkgray;
-  color: black;
+  background-image: url('https://i.imgur.com/0zOfXLs.jpg');
+  background-color: rgb(38, 38, 38);
+  color: whitesmoke;
   padding: 0 0 2vmin 2vmin;
 }
 
@@ -14,12 +15,17 @@ a > img {
   margin-left: .5vmin;
 }
 
+.nav-link {
+color: #479aff;
+}
+
 nav {
-padding-top: .5vh;
+background-color: rgb(79, 79, 79, 0.8);
+padding-top: 5px;
 display: flex;
 flex-direction: row;
 align-items: center;
-justify-content: end;
+justify-content: center;
 }
 
 nav > a {
@@ -32,40 +38,56 @@ span {
 font-size: 1.5vmin;
 }
 
-.team-index {
+.party-index {
 display: grid;
-grid-template-columns: repeat(5, 1fr);
+grid-template-columns: repeat(2, 1fr);
 grid-template-rows: 1fr 1fr;
-column-gap: 10px;
+column-gap: 30px;
 row-gap: 5vmin;
 }
 
-.team-edit {
+.new-adventurer {
+width: max-content;
+}
+
+.party-edit {
+background-color: rgb(79, 79, 79, 0.6);
 display: grid;
 grid-template-columns: repeat(3, 1fr);
 grid-template-rows: 1fr 1fr;
 column-gap: 5vmin;
-row-gap: 5vmin;
+row-gap: 20vmin;
+padding-top: 10px;
+padding-left: 15px;
+padding-right: 10px;
 }
 
-.team {
+.save-changes {
+color: #000000;
+}
+
+.party {
+background-color: rgb(79, 79, 79, 0.6);
 display: flex;
 flex-direction: column;
 flex: 1 0 auto;
 justify-content: start;
 box-sizing: border-box;
+padding-left: 10px;
+padding-bottom: 10px;
 }
 
-.edit-team {
+.edit-party {
 width: max-content;
 }
 
-.team-link {
+.party-link {
+color: #479aff;
 justify-self: end;
 margin-top: auto;
 }
 
-.members {
+.adventurers {
 margin: -1vmin, auto;
 }
 

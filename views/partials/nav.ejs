@@ -1,15 +1,14 @@
 <%- include("./header") %>
 <nav>
-    <a href="/">Home</a>
 
-    <a href="/parties">Parties</a>
+    <a class="nav-link" href="/parties">Main</a>
        
     <% if (user) { %>
-        <a href="/parties/new">Create</a>
-        <a href="/users/<%= user.id_id %>">My Parties</a>
-        <a href="/logout">Log Out</a>
+        <a class="nav-link"  href="/parties/new">New Party</a>
+        <a class="nav-link"  href="/users/<%= user.id_id %>">My Parties</a>
+        <a class="nav-link"  href="/logout">Log Out</a>
     <% } else { %>
-        <a href="/auth/google">Log In</a>
+        <a class="nav-link"  href="/auth/google">Log In</a>
   
     <% } %>
         

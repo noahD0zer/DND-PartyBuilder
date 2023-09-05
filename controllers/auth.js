@@ -9,8 +9,8 @@ router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 
 router.get('/oauth2callback', passport.authenticate(
   'google',
   {
-  successRedirect: '/',
-  failureRedirect: '/'
+  successRedirect: '/parties',
+  failureRedirect: '/parties'
   }
 
 ));
@@ -18,7 +18,7 @@ router.get('/oauth2callback', passport.authenticate(
 // Logout user
 router.get('/logout', function(req, res) {
   req.logout(function() {
-    res.redirect('/')
+    res.redirect('/parties')
   })
 })
 

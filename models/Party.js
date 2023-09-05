@@ -2,7 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema
 
 const adventurerSchema = new Schema ({
-    name: String,
+    name: {
+        type: String,
+        required: false
+    },
     class: {
         type: String,
         required: true
@@ -11,7 +14,10 @@ const adventurerSchema = new Schema ({
         type: String,
         required: true
     },
-    role: [String]
+    role: {
+        type: String,
+        required: false
+    }
 })
 
 const partySchema = new Schema ({
@@ -22,8 +28,7 @@ const partySchema = new Schema ({
 
     name: { type: String, required: true, unique: true },
     adventurers: [adventurerSchema],
-    updoots: Number
-  // ...other properties you might need
+    likes_count: { type: Number, default:1 }
 });
 
 const Party = mongoose.model('Party', partySchema);

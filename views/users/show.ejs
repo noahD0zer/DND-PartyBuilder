@@ -7,24 +7,25 @@
                 <%= party.name ? party.name : "New Party" %>
                 <span>
                     <% if (user.id == party.owner) { %>
-                    <a href="/parties/<%= party.id %>/warning"> Delete</a>
+                    <a class="party-link" href="/parties/<%= party.id %>/warning"> Delete</a>
                     <% } %>
                 </span>
             </h3>
-            <p>Updoots: <%= party.updoots ? party.updoots : 0 %></p>
+            <p>Likes: <%= party.likes_count %></p>
             <div class="adventurers">
                 <% party.adventurers.forEach(adventurer => { %>
                     <p>
-                        <%= adventurer.name ? `${adventurer.name} the ` : "" %><%= adventurer.race %>
+                        <%= adventurer.name ? `${adventurer.name} the ` : "" %><%= adventurer.race ? `${adventurer.race} ` : "" %><%= adventurer.class %>
                     </p>
                 <% }) %>
             </div>
             <div class="party-link">
                 <% if (user.id == party.owner) { %>
-                    <a href="/parties/<%= party._id %>/edit">Edit Party</a>
+                    <a class="party-link" href="/parties/<%= party._id %>/edit">Edit Party</a>
+                    <br>
                     <br>
                 <% } %>
-                <a href="/parties/<%= party._id %>">View Party</a>
+                <a class="party-link" href="/parties/<%= party._id %>">View Party</a>
             </div>
         </div>
     <% }) %>
