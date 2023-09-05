@@ -1,16 +1,18 @@
 <%- include("../partials/nav") %>
-<a class="save-changes" href="/users/<%= party.owner._id %>"><%= party.owner.name %></a>
-<br>
-<br>
-<div class="show-party">
-    <% party.adventurers.forEach(adventurer => { %>
-    <div class="show-party-fields">
-        <h4><%= adventurer.name %></h4>
-        <h5><%= adventurer.race ? `${adventurer.race} ` : "" %><%= adventurer.class%></h5>
-        <h6><%= adventurer.role %></h6>
-        <br>
+<div class="show-page">
+    <a class="save-changes" href="/users/<%= party.owner._id %>"><%= party.owner.name %></a>
+    <br>
+    <br>
+    <div class="show-party">
+        <% party.adventurers.forEach(adventurer => { %>
+        <div class="show-party-fields">
+            <h4><%= adventurer.name %></h4>
+            <h5><%= adventurer.race ? `${adventurer.race} ` : "" %><%= adventurer.class%></h5>
+            <h6><%= adventurer.role %></h6>
+            <br>
+        </div>
+        <% }) %>
     </div>
-    <% }) %>
 </div>
 
 <%- include("../partials/footer") %>
