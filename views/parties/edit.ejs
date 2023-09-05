@@ -11,10 +11,10 @@
 <br>
 <br>
 <div class="party-edit">
-    <% party.adventurers.forEach(adventurer => { %>
+    <% party.adventurers.forEach((adventurer, index) => { %>
         <div class="edit-party">
 
-            <h3>Adventurer <%= (party.adventurers.indexOf(adventurer) + 1) %></h3>
+            <h3>Adventurer <%= index + 1 %></h3>
             <form action="/parties/<%= party._id %>?_method=PATCH" method="post">
                 <input type="hidden" name="adventurerId" value="<%= adventurer._id %>">
                 <div class="edit-flex">
@@ -25,12 +25,22 @@
                     </div>
                     <div class="edit-group">
                         <label class="edit-label">Race:</label>
-                        <input id="race" class="edit-field" name="race" type="text" value="<%= adventurer.race %>" required>
+                        <select id="race" class="edit-field" name="race" required>
+                            <option value="Human" <%= adventurer.race === "Human" ? 'selected' : '' %>>Human</option>
+                            <option value="Elf" <%= adventurer.race === "Elf" ? 'selected' : '' %>>Elf</option>
+                            <option value="Dwarf" <%= adventurer.race === "Dwarf" ? 'selected' : '' %>>Dwarf</option>
+                            <!-- Add more race options here -->
+                        </select>
                         <br>
                     </div>
                     <div class="edit-group">
                         <label class="edit-label">Class:</label>
-                        <input id="class" class="edit-field" name="class" type="text" value="<%= adventurer.class ? adventurer.class : '' %>">
+                        <select id="class" class="edit-field" name="class">
+                            <option value="Warrior" <%= adventurer.class === "Warrior" ? 'selected' : '' %>>Warrior</option>
+                            <option value="Mage" <%= adventurer.class === "Mage" ? 'selected' : '' %>>Mage</option>
+                            <option value="Rogue" <%= adventurer.class === "Rogue" ? 'selected' : '' %>>Rogue</option>
+                            <!-- Add more class options here -->
+                        </select>
                         <br>
                     </div>
                     <div class="edit-group">
@@ -40,7 +50,7 @@
                     </div>
                 </div>
                 
-                    <input type="submit" value="Confirm changes">
+                <input type="submit" value="Confirm changes">
             </form>
             <br>
         </div>
@@ -53,10 +63,37 @@
             <input name="name" type="text" placeholder="Kronk">
             <br>
             <label>Race:</label>
-            <input name="race" type="text" placeholder="Human" required>
+            <select name="race" required>
+                <option value="Human">Human</option>
+                <option value="Tiefling">Tiefling</option>
+                <option value="Elf">Elf</option>
+                <option value="Drow">Drow</option>
+                <option value="Half-Elf">Half-Elf</option>
+                <option value="Dwarf">Dwarf</option>
+                <option value="Dragonborn">Dragonborn</option>
+                <option value="Half-Orc">Half-Orc</option>
+                <option value="Githyanki">Githyanki</option>
+                <option value="Halfling">Halfling</option>
+                <option value="Gnome">Gnome</option>
+                <!-- Add more race options here -->
+            </select>
             <br>
             <label>Class:</label>
-            <input name="class" type="text" placeholder="Barbarian">
+            <select name="class">
+                <option value="Barbarian">Barbarian</option>
+                <option value="Druid">Druid</option>
+                <option value="Rogue">Rogue</option>
+                <option value="Fighter">Fighter</option>
+                <option value="Ranger">Ranger</option>
+                <option value="Sorcerer">Sorcerer</option>
+                <option value="Bard">Bard</option>
+                <option value="Monk">Monk</option>
+                <option value="Warlock">Warlock</option>
+                <option value="Paladin">Paladin</option>
+                <option value="Cleric">Cleric</option>
+                <option value="Wizard">Wizard</option>
+                <!-- Add more class options here -->
+            </select>
             <br>
             <label>Role:</label>
             <input name="role" type="text" placeholder="Tank/Martial">
