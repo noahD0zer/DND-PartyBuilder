@@ -1,0 +1,92 @@
+* {
+  box-sizing: border-box;
+  font-family: Helvetica;
+}
+
+body {
+  background-color: darkgray;
+  color: black;
+  padding: 0 0 2vmin 2vmin;
+}
+
+a > img {
+  height: 3vh;
+  margin-left: .5vmin;
+}
+
+nav {
+padding-top: .5vh;
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: end;
+}
+
+nav > a {
+margin: 1vmin;
+display: flex;
+align-items: center;
+}
+
+span {
+font-size: 1.5vmin;
+}
+
+.team-index {
+display: grid;
+grid-template-columns: repeat(5, 1fr);
+grid-template-rows: 1fr 1fr;
+column-gap: 10px;
+row-gap: 5vmin;
+}
+
+.team-edit {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+grid-template-rows: 1fr 1fr;
+column-gap: 5vmin;
+row-gap: 5vmin;
+}
+
+.team {
+display: flex;
+flex-direction: column;
+flex: 1 0 auto;
+justify-content: start;
+box-sizing: border-box;
+}
+
+.edit-team {
+width: max-content;
+}
+
+.team-link {
+justify-self: end;
+margin-top: auto;
+}
+
+.members {
+margin: -1vmin, auto;
+}
+
+.edit-label::after {
+content: '\00a0\00a0'
+}
+
+.edit-field {
+margin-left: auto;
+}
+
+.no-indent {
+padding-left: 2vmin;
+}
+
+.edit-flex {
+display: flex;
+flex-direction: column;
+}
+
+.edit-group {
+display: flex;
+justify-content: start;
+}

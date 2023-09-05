@@ -1,5 +1,5 @@
 # DND-PartyBuilder
-An experimental app for creating DND parties. It will include the ability for each user to make their own parties with up to 5 adventurers, including class, race and role options for each individual adventurer.
+A web app for creating DND parties. It allows a user to make their own parties with up to 5 adventurers, including class, race and role options for each individual adventurer.
 
 # User Stories
 

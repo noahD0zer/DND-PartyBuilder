@@ -1,0 +1,33 @@
+<%- include("../partials/nav") %>
+
+<div class="party-index">
+    <% teams.forEach(party => { %>
+        <div class="party">
+            <h3>
+                <%= party.name ? party.name : "New Party" %>
+                <span>
+                    <% if (user.id == party.owner) { %>
+                    <a href="/parties/<%= party.id %>/confirm"> Delete</a>
+                    <% } %>
+                </span>
+            </h3>
+            <p>Updoots: <%= party.updoots ? party.updoots : 0 %></p>
+            <div class="adventurers">
+                <% party.adventurers.forEach(adventurer => { %>
+                    <p>
+                        <%= adventurer.name ? `${adventurer.name} the ` : "" %><%= adventurer.race %>
+                    </p>
+                <% }) %>
+            </div>
+            <div class="party-link">
+                <% if (user.id == party.owner) { %>
+                    <a href="/parties/<%= party._id %>/edit">Edit Party</a>
+                    <br>
+                <% } %>
+                <a href="/parties/<%= party._id %>">View Party</a>
+            </div>
+        </div>
+    <% }) %>
+</div>
+
+<%- include("../partials/footer") %>

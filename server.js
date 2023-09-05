@@ -1,29 +1,32 @@
+const passport = require('passport'); // Import passport
 const express = require('express');
 const path = require('path');
-//const passport = require('passport'); // Import passport
+
 const middleware = require('./config/middleware');
 const mongoose = require('mongoose');
 require('dotenv').config();
+
 const app = express();
-
-const passport = require ('passport');
-
-
-const AuthRouter = require('./controllers/auth'); // Import your auth routes
-// const PartiesRouter = require('./controllers/partyController');
-// const AdventurerRouter = require('./controllers/adventurerController');
-const UsersRouter = require('./controllers/users');
 
 //express session
 app.use(require('express-session')({ 
   secret: 'Enter your secret key',
   resave: true,
   saveUninitialized: true
- }));
+}));
 
-// // Require your passport configuration
+// Require your passport configuration
 app.use(passport.initialize());
 app.use(passport.session());
+
+//Routes
+const AuthRouter = require('./controllers/auth'); // Import your auth routes
+const PartiesRouter = require('./controllers/parties');
+const UsersRouter = require('./controllers/users');
+
+//app config
+//app.use(express.static(path.join(__dirname, 'public')));
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -43,16 +46,18 @@ mongoose.connect(process.env.DB_URL, {
   })
   .catch((error) => {
     console.error('Error connecting to MongoDB:', error.message);
-  });
+}); 
 
 app.get('/', (req, res) => {
   res.render('index', { title: 'Main Page' });
 });
 
+// Use Routers
 app.use('/', AuthRouter); // Use the AuthRouter for authentication routes
-// app.use('/parties', PartiesRouter);
+app.use('/parties', PartiesRouter);
 // app.use('/adventurers', AdventurerRouter);
 app.use('/users', UsersRouter);
+
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
