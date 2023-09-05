@@ -1,37 +1,35 @@
 const express = require('express');
-const router = express.Router();
-const User = require('../models/User');
-const Party = require('../models/Party');
+require('dotenv').config()
+const User = require('../models/User')
+const Party = require("../models/Party")
+const checkLogin = require('../config/ensureLoggedIn')
 
-// Ensure user is authenticated
-const ensureAuthenticated = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect('/auth/google');
-};
+const router = express.Router()
 
-// Show user profile
-router.get('/:id', ensureAuthenticated, (req, res) => {
-  User.findById(req.params.id)
-    .then(user => {
-      if (!user) {
-        return res.status(404).render('error', { message: 'User not found' });
-      }
+// Routes and Controllers
 
-      Party.find({ owner: user._id })
-        .then(parties => {
-          res.render('users/show', { parties, user, title: user.name });
+// Index
+// only here to redirect from login
+router.get("/", (req, res) => {
+    res.redirect(`/users/${req.user._id}`)
+})
+
+// Show
+router.get("/:id", (req, res) => {
+    User.findById(req.params.id)
+        .then(user => {
+            Party.find({ owner: user._id })
+                .then(parties => {
+                    res.render("users/show", { parties, user, title: `${user.name}`})
+                })
         })
         .catch(err => {
-          console.error(err);
-          res.status(500).render('error', { message: 'Internal Server Error' });
-        });
-    })
-    .catch(err => {
-      console.error(err);
-      res.status(500).render('error', { message: 'Internal Server Error' });
-    });
-});
+            console.log(err)
+            res.redirect("/error")
+        })
+})
+    
+// res.render("users/show", { user, title: `${username}` })
 
+// Export
 module.exports = router;

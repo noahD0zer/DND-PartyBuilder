@@ -19,6 +19,7 @@ router.get('/', (req, res) => {
        })
   
 })
+
 // New Party
 router.get("/new", checkLogin, (req, res) => {
   res.render("parties/new", { user: req.user, title: "New Party" })
@@ -37,6 +38,56 @@ router.post('/', checkLogin, (req, res) => {
       })
 })
 
+// Create Adventurer
+router.post("/:id", checkLogin, (req,res) => {
+  Party.findById(req.params.id)
+       .then(party => {
+        if (req.user.id == party.owner) {
+          party.adventurers.push(req.body)
+          return party.save()
+        } else {
+          return
+        }
+       })
+       .then((data) => {
+        if (data) {
+          res.redirect('back')
+        } else {
+          res.redirect("/error")
+        }  
+       })
+       .catch(err => {
+        console.log(err)
+       })
+})
+
+//patch
+router.patch("/:id", checkLogin, (req,res) => {
+  Party.findById(req.params.id)
+       .then(party => {
+        if (req.user.id == party.owner) {
+          var changingAdventurer = party.adventurers.id(req.body.memberId)
+          changingAdventurer.Name = req.body.Name
+          changingAdventurer.Race = req.body.Race
+          changingAdventurer.Class = req.body.Class
+          changingAdventurer.Role = req.body.Role
+          return party.save()
+        } else {
+          return
+        }
+       })
+       .then((data) => {
+        if (data) {
+          res.redirect('back')
+        } else {
+          res.redirect('/error')
+        }
+       })
+       .catch(err => {
+        console.log(err)
+       })
+})
+
 // Get a single party by ID
 exports.getPartyById = async (req, res) => {
   try {
@@ -50,26 +101,24 @@ exports.getPartyById = async (req, res) => {
   }
 };
 
-// Update a party
-exports.updateParty = async (req, res) => {
-  try {
-    const updatedParty = await Party.findByIdAndUpdate(
-      req.params.id,
-      {
-        name: req.body.name,
-        adventurers: req.body.adventurers,
-        // ...other properties to update
-      },
-      { new: true } // Return the updated document
-    );
-    if (!updatedParty) {
-      return res.status(404).json({ message: 'Party not found' });
-    }
-    res.status(200).json(updatedParty);
-  } catch (error) {
-    res.status(500).json({ message: 'Error updating party' });
-  }
-};
+
+// Edit
+router.get("/:id/edit", checkLogin, (req,res) => {
+  Party.findById(req.params.id)
+       .then(party => {
+        if (req.user.id == party.owner) {
+          res.render("parties/edit", {
+            user: req.user,
+            title: "Edit " + (party.name ? `${party.name}` : "New Party"),
+            party 
+          })
+        } else {
+        }
+       })
+       .catch(err => {
+        console.log(err)
+       })
+})
 
 // Delete a party
 router.delete("/:id/delete", checkLogin, (req, res) => {
@@ -95,13 +144,13 @@ router.delete("/:id/delete", checkLogin, (req, res) => {
 })
 
 // Delete warning
-router.get("/:id/confirm", checkLogin, (req,res) => {
+router.get("/:id/warning", checkLogin, (req,res) => {
   Party.findById(req.params.id)
        .then(party => {
         if (req.user.id == party.owner) {
-          res.render('parties/confirm', {
+          res.render('parties/warning', {
             user: req.user,
-            team,
+            party,
             title: "You sure about that???"
           })
         } else {
@@ -117,7 +166,7 @@ router.get("/:id/confirm", checkLogin, (req,res) => {
 router.get("/:id", (req,res) => {
   Party.findById(req.params.id)
        .populate('owner')
-       .then(Party => {
+       .then(party => {
           res.render("parties/show", {
             user: req.user,
             title: party.name ? '${party.name}' : "New Party",

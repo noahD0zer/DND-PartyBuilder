@@ -1,0 +1,69 @@
+<%- include("../partials/nav") %>
+
+<div class="name-desc">
+    <h2>
+        <%= party.name ? party.name : "New Party" %>
+    </h2>
+</div>
+<a href="/users/<%= user._id %>">Save Changes</a>
+<br>
+<br>
+<br>
+<br>
+<div class="team-edit">
+    <% party.adventurers.forEach(adventurer => { %>
+        <div class="edit-party">
+
+            <h3>Adventurer <%= (party.adventurers.indexOf(adventurer) + 1) %></h3>
+            <form action="/parties/<%= party._id %>?_method=PATCH" method="post">
+                <input type="hidden" name="adventurer" value="<%= adventurer._id %>">
+                <div class="edit-flex">
+                    <div class="edit-group">     
+                        <label class="edit-label">Name:</label>
+                        <input class="edit-field" name="name" type="text" value="<%= adventurer.name ? adventurer.name : '' %>">
+                        <br>
+                    </div>
+                    <div class="edit-group">
+                        <label class="edit-label">Race:</label>
+                        <input class="edit-field" name="race" type="text" value="<%= adventurer.race %>" required>
+                        <br>
+                    </div>
+                    <div class="edit-group">
+                        <label class="edit-label">Class:</label>
+                        <input class="edit-field" name="class" type="text" value="<%= adventurer.class ? adventurer.class : '' %>">
+                        <br>
+                    </div>
+                    <div class="edit-group">
+                        <label class="edit-label">Role:</label>
+                        <input class="edit-field" name="role" type="text" value="<%= adventurer.role ? adventurer.role : '' %>">
+                        <br>
+                    </div>
+                </div>
+                
+                    <input type="submit" value="Confirm changes">
+            </form>
+            <br>
+        </div>
+    <% }) %>
+    <br>
+    <% if (party.adventurers.length < 5) { %>
+        <h3>New Adventurer</h3>
+        <form action="/parties/<%= party._id %>" method="post">
+            <label>Name:</label>
+            <input name="name" type="text" placeholder="Kronk">
+            <br>
+            <label>Race:</label>
+            <input name="race" type="text" placeholder="Human" required>
+            <br>
+            <label>Class</label>
+            <input name="class" type="text" placeholder="Barbarian">
+            <br>
+            <label>Role</label>
+            <input name="role" type="text" placeholder="Tank/Martial">
+            <br>
+            <input type="submit" value="Add to Party">
+        </form>
+    <% } %>
+</div>
+
+<%- include("../partials/footer") %>

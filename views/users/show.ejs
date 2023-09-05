@@ -1,13 +1,13 @@
 <%- include("../partials/nav") %>
 
 <div class="party-index">
-    <% teams.forEach(party => { %>
+    <% parties.forEach(party => { %>
         <div class="party">
             <h3>
                 <%= party.name ? party.name : "New Party" %>
                 <span>
                     <% if (user.id == party.owner) { %>
-                    <a href="/parties/<%= party.id %>/confirm"> Delete</a>
+                    <a href="/parties/<%= party.id %>/warning"> Delete</a>
                     <% } %>
                 </span>
             </h3>

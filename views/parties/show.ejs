@@ -1,5 +1,5 @@
 <%- include("../partials/nav") %>
-<a href="/users/<%= party.owner._id %>">Back to <%= party.owner.name %>'s page</a>
+<a href="/users/<%= party.owner._id %>"><%= party.owner.name %></a>
 
 <h3>Adventurers:</h3>
     <% party.adventurers.forEach(adventurer => { %>

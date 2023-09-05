@@ -1,0 +1,13 @@
+<%- include("../partials/nav") %>
+
+<form action="/parties/<%= party.id %>/delete?_method=DELETE" method="post">
+    <button type="submit">Disband the merry band</button>
+</form>
+<br>
+<form action="/users/<%= user.id %>" method="get">
+    <button type="submit">Just kidding</button>
+</form>
+  
+
+
+<%- include("../partials/footer") %>
